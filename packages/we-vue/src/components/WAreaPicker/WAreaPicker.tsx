@@ -72,22 +72,12 @@ export default mixins<ioptions & ExtractVue<[typeof Picker]>>(Picker).extend({
 
   data () {
     return {
-      lazyValue: this.value,
+      internalValue: this.value,
       columns: [{ options: [] }, { options: [] }, { options: [] }],
     }
   },
 
   computed: {
-    internalValue: {
-      get (): string {
-        return this.lazyValue
-      },
-      set (val: string | any[]): void {
-        this.lazyValue = val
-        // this.$emit('input', val)
-      },
-    },
-
     province (): typeArea {
       return this.areaList.province_list || {}
     },
@@ -109,6 +99,10 @@ export default mixins<ioptions & ExtractVue<[typeof Picker]>>(Picker).extend({
     value (val) {
       this.internalValue = val
       this.setOptions()
+    },
+
+    internalValue (val) {
+      this.$emit('input', val)
     },
 
     areaList: {
@@ -163,13 +157,12 @@ export default mixins<ioptions & ExtractVue<[typeof Picker]>>(Picker).extend({
     setOptions (): void {
       let code = this.internalValue || Object.keys(this.county)[0] || ''
       const { picker } = this.$refs
-      const province = this.getList(columnType.province)
-      const city = this.getList(columnType.city, code.slice(0, 2))
-
       /* istanbul ignore next */
       if (!picker) {
         return
       }
+      const province = this.getList(columnType.province)
+      const city = this.getList(columnType.city, code.slice(0, 2))
 
       picker.setColumnOptions(0, province)
       picker.setColumnOptions(1, city)
@@ -233,12 +226,8 @@ export default mixins<ioptions & ExtractVue<[typeof Picker]>>(Picker).extend({
       this.setOptions()
     },
 
-    onConfirm (e: Event) {
-      // TODO:
-      // e.preventDefault()
-
+    onConfirm () {
       this.isActive = false
-      console.log(this.internalValue)
       this.$emit('confirm', this.internalValue)
     },
 

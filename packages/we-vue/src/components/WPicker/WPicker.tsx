@@ -195,7 +195,6 @@ export default mixins(ToaaleableFactory('visible', 'update:visible')).extend({
 
     // confirm event handler
     onConfirm (): void {
-      // TODO: v-model 问题
       this.$emit('input', this.getValues())
       this.$emit('confirm', this)
       this.isActive = false
