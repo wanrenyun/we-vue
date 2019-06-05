@@ -7,9 +7,7 @@ module.exports = ctx => ({
   plugins: [
     postimport(),
     posturl(),
-    autoprefixer({
-      browsers: ['>0.5%', 'last 2 versions', 'not dead', 'not op_mini all'],
-    }),
+    autoprefixer({}),
     mqpacker(),
   ],
 })
