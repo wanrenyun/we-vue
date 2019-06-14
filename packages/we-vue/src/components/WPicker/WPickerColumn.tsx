@@ -37,7 +37,7 @@ export default Vue.extend<options>().extend({
       type: Number,
       default: 7,
       validator: (val: number) => {
-        return [3, 5, 7].indexOf(val) > -1
+        return [3, 5, 7].includes(val)
       },
     },
     defaultIndex: {

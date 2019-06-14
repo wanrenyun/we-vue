@@ -192,7 +192,7 @@ export default mixins<options &
   mounted () {
     if (!this.value) {
       this.internalValue =
-        this.type.indexOf('date') > -1
+        this.type.includes('date')
           ? this.startDate
           : `${('0' + this.startHour).slice(-2)}:00`
     } else {
@@ -217,7 +217,7 @@ export default mixins<options &
 
     correctValue (value: Date | string | number): Date | string {
       // validate value
-      const isDateType = this.type.indexOf('date') > -1
+      const isDateType = this.type.includes('date')
       if (isDateType && !isValidDate(value)) {
         value = this.startDate
       } else if (!value) {
