@@ -213,10 +213,8 @@ export default mixins<ioptions & ExtractVue<[typeof Picker]>>(Picker).extend({
       return area
     },
 
-    onChange (picker: PickerInstance) {
-      const values = this.getValues()
-
-      this.internalValue = values[0].code as string
+    onChange (picker: PickerInstance, values: any[], columnIndex: number): void {
+      this.internalValue = values[columnIndex].code as string
       this.setOptions()
       this.$emit('change', picker, values)
     },

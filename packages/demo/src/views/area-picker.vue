@@ -1,8 +1,8 @@
 <template>
   <div class="page">
     <w-group title="省市区选择示例">
-      <w-cell title="默认" is-link @click.native="showPickerDefault"/>
-      <w-cell title="两列" is-link @click.native="showPickerTwoColumns"/>
+      <w-cell title="默认" :value="selectedArea" is-link @click.native="showPickerDefault"/>
+      <w-cell title="两列" :value="selectedArea" is-link @click.native="showPickerTwoColumns"/>
     </w-group>
 
     <w-area-picker
@@ -29,11 +29,11 @@ import areaList from '../assets/data/area'
 export default {
   data () {
     return {
-      pickerShowDefault: true,
+      pickerShowDefault: false,
       pickerShowTwoColumns: false,
       area: areaList,
       code: '110101',
-      selectedArea: '110101'
+      selectedArea: '230828'
     }
   },
 
