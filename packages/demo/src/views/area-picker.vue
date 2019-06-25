@@ -1,24 +1,24 @@
 <template>
   <div class="page">
     <w-group title="省市区选择示例">
-      <w-cell title="默认" :value="selectedArea" is-link @click.native="showPickerDefault"/>
-      <w-cell title="两列" :value="selectedArea" is-link @click.native="showPickerTwoColumns"/>
+      <w-cell title="默认" :value="area1" is-link @click="defaultPickerVisible = true"/>
+      <w-cell title="两列" :value="area2" is-link @click="twoColumnPickerVisible = true"/>
     </w-group>
 
     <w-area-picker
-      :visible.sync="pickerShowDefault"
+      :visible.sync="defaultPickerVisible"
       :area-list="area"
-      @confirm="confirmArea"
-      v-model="selectedArea"
+      @confirm="handleConfirm"
+      v-model="area1"
     />
 
     <w-area-picker
-      :visible.sync="pickerShowTwoColumns"
+      :visible.sync="twoColumnPickerVisible"
       :area-list="area"
       value-key="name"
       columns-count="2"
-      @confirm="confirmArea"
-      v-model="selectedArea"
+      @confirm="handleConfirm"
+      v-model="area2"
     />
   </div>
 </template>
@@ -29,26 +29,16 @@ import areaList from '../assets/data/area'
 export default {
   data () {
     return {
-      pickerShowDefault: false,
-      pickerShowTwoColumns: false,
+      defaultPickerVisible: false,
+      twoColumnPickerVisible: false,
       area: areaList,
-      code: '110101',
-      selectedArea: '230828'
+      area1: '110101',
+      area2: '440300'
     }
   },
 
-  mounted () {},
-
   methods: {
-    showPickerDefault () {
-      this.pickerShowDefault = true
-    },
-
-    showPickerTwoColumns () {
-      this.pickerShowTwoColumns = true
-    },
-
-    confirmArea () {
+    handleConfirm () {
       console.log()
     }
   },

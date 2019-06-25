@@ -15,7 +15,7 @@ enum columnType {
   county = 'county',
 }
 
-type typeAreaList = {
+type AreaList = {
   /* eslint-disable camelcase */
   province_list?: {
     [code: string]: string
@@ -31,7 +31,7 @@ type typeAreaList = {
 }
 
 // 每列的选项值类型， { '110000': '北京' }
-type typeArea = {
+type Area = {
   [code: string]: string
 }
 
@@ -52,7 +52,7 @@ export default mixins<ioptions & ExtractVue<[typeof Picker]>>(Picker).extend({
     areaList: {
       type: Object,
       default: () => ({}),
-    } as PropValidator<typeAreaList>,
+    } as PropValidator<AreaList>,
     visibleItemCount: {
       type: Number,
       default: 7,
@@ -78,15 +78,15 @@ export default mixins<ioptions & ExtractVue<[typeof Picker]>>(Picker).extend({
   },
 
   computed: {
-    province (): typeArea {
+    province (): Area {
       return this.areaList.province_list || {}
     },
 
-    city (): typeArea {
+    city (): Area {
       return this.areaList.city_list || {}
     },
 
-    county (): typeArea {
+    county (): Area {
       return this.areaList.county_list || {}
     },
 
@@ -118,8 +118,8 @@ export default mixins<ioptions & ExtractVue<[typeof Picker]>>(Picker).extend({
   },
 
   methods: {
-    getList (type: columnType, code = ''): typeArea[] {
-      let result: typeArea[] = []
+    getList (type: columnType, code = ''): Area[] {
+      let result: Area[] = []
       if (type !== 'province' && !code) {
         return result
       }
@@ -180,7 +180,7 @@ export default mixins<ioptions & ExtractVue<[typeof Picker]>>(Picker).extend({
     },
 
     // get current selected values of all typeColumns
-    getValues (): typeArea[] {
+    getValues (): Area[] {
       return this.$refs.picker ? this.$refs.picker.getValues() : []
     },
 
